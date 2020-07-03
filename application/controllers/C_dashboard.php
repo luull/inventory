@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class C_dashboard extends CI_Controller {
+class C_dashboard extends CI_Controller
+{
 
 	public function __construct()
 	{
@@ -10,12 +11,12 @@ class C_dashboard extends CI_Controller {
 		$this->load->model('M_ssp');
 
 		if ($this->session->userdata('session') != 'online') {
-			
+
 			redirect('login');
 		}
 
 		if ($this->session->userdata('status') == 'blokir') {
-			
+
 			$this->session->set_flashdata('alert', 'anda di blokir');
 			redirect('login');
 		}
@@ -76,7 +77,7 @@ class C_dashboard extends CI_Controller {
 		$table2 = 'suplier';
 
 		$data['suplier'] = $this->M_ssp->get_data($table2)->result();
- 
+
 		$data['barang'] = $this->M_ssp->get_where_data($table, $where)->result();
 
 		$this->load->view('layout/header', $data);
@@ -126,7 +127,7 @@ class C_dashboard extends CI_Controller {
 
 		$this->load->view('layout/header', $data);
 		$this->load->view('dashboard/content/form_edit_suplier', $data);
-		$this->load->view('layout/footer');		
+		$this->load->view('layout/footer');
 	}
 
 	public function menu_data_pinjam()
@@ -141,7 +142,7 @@ class C_dashboard extends CI_Controller {
 
 		$this->load->view('layout/header', $data);
 		$this->load->view('dashboard/content/data_pinjam', $data);
-		$this->load->view('layout/footer');	
+		$this->load->view('layout/footer');
 	}
 
 	public function menu_pinjam()
@@ -153,7 +154,7 @@ class C_dashboard extends CI_Controller {
 
 		$this->load->view('layout/header', $data);
 		$this->load->view('dashboard/content/opsi_pinjam_barang', $data);
-		$this->load->view('layout/footer');			
+		$this->load->view('layout/footer');
 	}
 
 	public function menu_tambah_pinjam($id)
@@ -163,10 +164,10 @@ class C_dashboard extends CI_Controller {
 
 		$this->load->view('layout/header', $data);
 		$this->load->view('dashboard/content/form_pinjam_barang', $data);
-		$this->load->view('layout/footer');	
+		$this->load->view('layout/footer');
 	}
 
-	public function menu_user() 
+	public function menu_user()
 	{
 		$data['title'] = 'Kelola User';
 
@@ -208,23 +209,21 @@ class C_dashboard extends CI_Controller {
 
 	public function add_barang()
 	{
-		$this->form_validation->set_rules('id','id','required');
-		$this->form_validation->set_rules('nama_barang','nama_barang','required');
-		$this->form_validation->set_rules('tgl_masuk','tgl_masuk','required');
-		$this->form_validation->set_rules('jml_masuk','jml_masuk','required');
-		$this->form_validation->set_rules('id_suplier','id_suplier','required');
-		$this->form_validation->set_rules('kondisi','kondisi','required');
-		$this->form_validation->set_rules('lokasi','lokasi','required');
-		$this->form_validation->set_rules('sumber_dana','sumber_dana','required');
-		$this->form_validation->set_rules('spesifikasi','spesifikasi','required');
+		$this->form_validation->set_rules('id', 'id', 'required');
+		$this->form_validation->set_rules('nama_barang', 'nama_barang', 'required');
+		$this->form_validation->set_rules('tgl_masuk', 'tgl_masuk', 'required');
+		$this->form_validation->set_rules('jml_masuk', 'jml_masuk', 'required');
+		$this->form_validation->set_rules('id_suplier', 'id_suplier', 'required');
+		$this->form_validation->set_rules('kondisi', 'kondisi', 'required');
+		$this->form_validation->set_rules('lokasi', 'lokasi', 'required');
+		$this->form_validation->set_rules('sumber_dana', 'sumber_dana', 'required');
+		$this->form_validation->set_rules('spesifikasi', 'spesifikasi', 'required');
 
 		if ($this->form_validation->run() == false) {
-			
-			$this->session->set_flashdata('alert', 'Tidak dapat di proses, mohon lengkapi form pengisian');
-			redirect('tambah-barang');			
-		}
 
-		else {
+			$this->session->set_flashdata('alert', 'Tidak dapat di proses, mohon lengkapi form pengisian');
+			redirect('tambah-barang');
+		} else {
 
 			$table = 'barang';
 
@@ -247,29 +246,27 @@ class C_dashboard extends CI_Controller {
 
 	public function edit_barang($id)
 	{
-		$this->form_validation->set_rules('id','id','required');
-		$this->form_validation->set_rules('nama_barang','nama_barang','required');
-		$this->form_validation->set_rules('tgl_masuk','tgl_masuk','required');
-		$this->form_validation->set_rules('id_suplier','id_suplier','required');
-		$this->form_validation->set_rules('kondisi','kondisi','required');
-		$this->form_validation->set_rules('lokasi','lokasi','required');
-		$this->form_validation->set_rules('sumber_dana','sumber_dana','required');
-		$this->form_validation->set_rules('spesifikasi','spesifikasi','required');
+		$this->form_validation->set_rules('id', 'id', 'required');
+		$this->form_validation->set_rules('nama_barang', 'nama_barang', 'required');
+		$this->form_validation->set_rules('tgl_masuk', 'tgl_masuk', 'required');
+		$this->form_validation->set_rules('id_suplier', 'id_suplier', 'required');
+		$this->form_validation->set_rules('kondisi', 'kondisi', 'required');
+		$this->form_validation->set_rules('lokasi', 'lokasi', 'required');
+		$this->form_validation->set_rules('sumber_dana', 'sumber_dana', 'required');
+		$this->form_validation->set_rules('spesifikasi', 'spesifikasi', 'required');
 
 		if ($this->form_validation->run() == false) {
-			
-			$this->session->set_flashdata('alert', 'Tidak dapat di proses, mohon lengkapi form pengisian');
-			redirect('tambah-barang');			
-		}
 
-		else {
+			$this->session->set_flashdata('alert', 'Tidak dapat di proses, mohon lengkapi form pengisian');
+			redirect('tambah-barang');
+		} else {
 
 			$table = 'barang';
 			$where['id_barang'] = $id;
 
 			$data['id_barang'] = $this->input->post('id');
 			$data['nama_barang'] = $this->input->post('nama_barang');
-			$data['tgl_masuk'] = $this->input->post('tgl_masuk');	
+			$data['tgl_masuk'] = $this->input->post('tgl_masuk');
 			$data['id_suplier'] = $this->input->post('id_suplier');
 			$data['kondisi'] = $this->input->post('kondisi');
 			$data['lokasi'] = $this->input->post('lokasi');
@@ -289,29 +286,27 @@ class C_dashboard extends CI_Controller {
 		$where['id_barang'] = $id;
 		$this->M_ssp->hapus_data($table, $where);
 
-		$this->session->set_flashdata('alert', 'data berhasil di hapus');
+		$this->session->set_flashdata('alert', 'Data berhasil di hapus');
 		redirect('barang');
 	}
 
-	public function add_stok() 
+	public function add_stok()
 	{
 		$this->form_validation->set_rules('id_barang', 'id_barang', 'required');
 		$this->form_validation->set_rules('tambah_stok', 'tambah_stok', 'required');
 
-		if($this->form_validation->run() == false) {
+		if ($this->form_validation->run() == false) {
 
 			$this->session->set_flashdata('peringatan', 'Tidak dapat di proses, mohon lengkapi form pengisian');
-			redirect('tambah-stok');					
-		}
-
-		else {
+			redirect('tambah-stok');
+		} else {
 
 			$table = 'stok';
 			$where['id_barang'] = $this->input->post('id_barang');
 
 			$total_barang = $this->M_ssp->get_where_data($table, $where)->result();
 
-			foreach($total_barang as $tb) :
+			foreach ($total_barang as $tb) :
 
 				$data['total_barang'] = $tb->total_barang + $this->input->post('tambah_stok');
 				$data['jml_masuk'] = $tb->jml_masuk + $this->input->post('tambah_stok');
@@ -321,24 +316,22 @@ class C_dashboard extends CI_Controller {
 			$this->M_ssp->edit_data($table, $where, $data);
 
 			$this->session->set_flashdata('alert', 'Stok Berhasil Ditambah');
-			redirect('tambah-stok');			
+			redirect('tambah-stok');
 		}
 	}
 
 	public function add_suplier()
 	{
-		$this->form_validation->set_rules('id_suplier','id_suplier','required');
-		$this->form_validation->set_rules('nama_suplier','nama_suplier','required');
-		$this->form_validation->set_rules('telp_suplier','telp_suplier','required');
-		$this->form_validation->set_rules('alamat_suplier','alamat_suplier','required');
+		$this->form_validation->set_rules('id_suplier', 'id_suplier', 'required');
+		$this->form_validation->set_rules('nama_suplier', 'nama_suplier', 'required');
+		$this->form_validation->set_rules('telp_suplier', 'telp_suplier', 'required');
+		$this->form_validation->set_rules('alamat_suplier', 'alamat_suplier', 'required');
 
 		if ($this->form_validation->run() == false) {
-			
+
 			$this->session->set_flashdata('alert', 'Tidak dapat di proses, mohon lengkapi form pengisian');
 			redirect('tambah-suplier');
-		}
-
-		else {
+		} else {
 
 			$table = 'suplier';
 
@@ -354,20 +347,18 @@ class C_dashboard extends CI_Controller {
 		}
 	}
 
-	public function edit_suplier($id) 
+	public function edit_suplier($id)
 	{
-		$this->form_validation->set_rules('id_suplier','id_suplier','required');
-		$this->form_validation->set_rules('nama_suplier','nama_suplier','required');
-		$this->form_validation->set_rules('telp_suplier','telp_suplier','required');
-		$this->form_validation->set_rules('alamat_suplier','alamat_suplier','required');
+		$this->form_validation->set_rules('id_suplier', 'id_suplier', 'required');
+		$this->form_validation->set_rules('nama_suplier', 'nama_suplier', 'required');
+		$this->form_validation->set_rules('telp_suplier', 'telp_suplier', 'required');
+		$this->form_validation->set_rules('alamat_suplier', 'alamat_suplier', 'required');
 
 		if ($this->form_validation->run() == false) {
-			
+
 			$this->session->set_flashdata('alert', 'Tidak dapat di proses, mohon lengkapi form pengisian');
 			redirect('tambah-suplier');
-		}
-
-		else {
+		} else {
 
 			$table = 'suplier';
 			$where['id_suplier'] = $id;
@@ -381,7 +372,7 @@ class C_dashboard extends CI_Controller {
 
 			$this->session->set_flashdata('alert', 'Suplier Berhasil di Ubah');
 			redirect('suplier');
-		}		
+		}
 	}
 
 	public function delete_suplier($id)
@@ -397,20 +388,18 @@ class C_dashboard extends CI_Controller {
 
 	public function add_pinjam_barang($id)
 	{
-		$this->form_validation->set_rules('pinjam','pinjam','required');
-		$this->form_validation->set_rules('jml_barang','jml_barang','required');
-		$this->form_validation->set_rules('tgl_pinjam','tgl_pinjam','required');
-		$this->form_validation->set_rules('tgl_kembali','tgl_kembali','required');	
-		$this->form_validation->set_rules('lokasi','lokasi','required');
-		$this->form_validation->set_rules('kondisi','kondisi','required');
+		$this->form_validation->set_rules('pinjam', 'pinjam', 'required');
+		$this->form_validation->set_rules('jml_barang', 'jml_barang', 'required');
+		$this->form_validation->set_rules('tgl_pinjam', 'tgl_pinjam', 'required');
+		$this->form_validation->set_rules('tgl_kembali', 'tgl_kembali', 'required');
+		$this->form_validation->set_rules('lokasi', 'lokasi', 'required');
+		$this->form_validation->set_rules('kondisi', 'kondisi', 'required');
 
 		if ($this->form_validation->run() == false) {
-			
-			$this->session->set_flashdata('alert', 'Tidak dapat di proses, mohon lengkapi form pengisian');
-			redirect('pinjam-barang/'.$id);
-		}
 
-		else {
+			$this->session->set_flashdata('alert', 'Tidak dapat di proses, mohon lengkapi form pengisian');
+			redirect('pinjam-barang/' . $id);
+		} else {
 
 			$table = 'pinjam_barang';
 
@@ -421,31 +410,28 @@ class C_dashboard extends CI_Controller {
 			$data['id_barang'] = $id;
 			$data['lokasi'] = $this->input->post('lokasi');
 			$data['kondisi'] = $this->input->post('kondisi');
-			$data['status'] = 'pinjam';	
+			$data['status'] = 'pinjam';
 
 			$this->M_ssp->insert_data($table, $data);
 
-			$this->session->set_flashdata('alert', $data['peminjam'].' Berhasil Pinjam Barang');
+			$this->session->set_flashdata('alert', $data['peminjam'] . ' Berhasil Pinjam Barang');
 			redirect('pinjam');
 		}
-
 	}
 
 
 	public function add_user()
 	{
-		$this->form_validation->set_rules('nama','nama','required');
-		$this->form_validation->set_rules('username','username','required');
-		$this->form_validation->set_rules('password','password','required');
-		$this->form_validation->set_rules('level','level','required');
+		$this->form_validation->set_rules('nama', 'nama', 'required');
+		$this->form_validation->set_rules('username', 'username', 'required');
+		$this->form_validation->set_rules('password', 'password', 'required');
+		$this->form_validation->set_rules('level', 'level', 'required');
 
 		if ($this->form_validation->run() == false) {
-			
+
 			$this->session->set_flashdata('alert', 'Tidak dapat di proses, mohon lengkapi form pengisian');
 			redirect('tambah-user');
-		}
-
-		else {
+		} else {
 
 			$table = 'user';
 
@@ -475,7 +461,7 @@ class C_dashboard extends CI_Controller {
 		redirect('data-pinjam');
 	}
 
-	public function hapus_pinjam_barang($id) 
+	public function hapus_pinjam_barang($id)
 	{
 		$table = 'pinjam_barang';
 		$where['id_pinjam'] = $id;
@@ -486,20 +472,18 @@ class C_dashboard extends CI_Controller {
 		redirect('data-pinjam');
 	}
 
-	public function edit_user($id) 
+	public function edit_user($id)
 	{
-		$this->form_validation->set_rules('nama','nama','required');
-		$this->form_validation->set_rules('username','username','required');
-		$this->form_validation->set_rules('password','password','required');
-		$this->form_validation->set_rules('level','level','required');
+		$this->form_validation->set_rules('nama', 'nama', 'required');
+		$this->form_validation->set_rules('username', 'username', 'required');
+		$this->form_validation->set_rules('password', 'password', 'required');
+		$this->form_validation->set_rules('level', 'level', 'required');
 
 		if ($this->form_validation->run() == false) {
-			
-			$this->session->set_flashdata('alert', 'Tidak dapat di proses, mohon lengkapi form pengisian');
-			redirect('edit-user/'.$id);
-		}
 
-		else {
+			$this->session->set_flashdata('alert', 'Tidak dapat di proses, mohon lengkapi form pengisian');
+			redirect('edit-user/' . $id);
+		} else {
 
 			$table = 'user';
 			$where['id_user'] = $id;

@@ -1,125 +1,125 @@
-  <?php if($this->session->flashdata('alert')) : ?>
-	  <div class="alert alert-primary">
-	  	<h5><i class="fa fa-check"></i> Berhasil</h5>
-	  	<p><?= $this->session->flashdata('alert') ?></p>
-	  </div>
+  <?php if ($this->session->flashdata('alert')) : ?>
+  	<div class="alert alert-success">
+  		<h4 class="alert-heading"><i class="fa fa-check"></i> Berhasil</h4>
+  		<p><?= $this->session->flashdata('alert') ?></p>
+  	</div>
   <?php endif; ?>
 
-<div class='row'>
-  <div class='col-md-12'>
+  <div class='row'>
+  	<div class='col-md-12'>
 
-  	<div class='card'>
-  		<div class='card-header'>
-  			<i class="fas fa-table"></i> Data User <a href="tambah-user"><span class="badge badge-danger float-right"><i class="fa fa-plus"></i> Tambah</span></a>
-  		</div>
+  		<div class='card'>
+  			<div class='card-header'>
+  				<h2 class="text-center" style="font-family: 'Montserrat', sans-serif;">Data user</h2>
+  				<a href="tambah-user"><button class="btn btn-success float-right"><i class="fa fa-plus"></i> Tambah</button></a>
+  			</div>
 
-  		<div class="card-body row">
-  			<div class="table-responsive">
-	  			<table class='table table-striped table-bordered table-sm table-hover'>
-	  				<thead>
-	  					<tr>
-	  						<th>Nomor</th>
-	  						<th>ID User</th>
-	  						<th>Nama</th>
-	  						<th>Username</th>
-	  						<th>Level</th>
-	  						<th>Status</th>
-	  						<th>Blok User</th>
-	  						<th>Opsi</th>
-	  					</tr>
-	  				</thead>
 
-	  				<tbody>
-	  					<?php $nomor = 1; ?>
-	  					<?php foreach($akun as $row) : ?>
+  			<div class="card-body row">
+  				<div class="table-responsive">
+  					<table class='table table-striped '>
+  						<thead>
+  							<tr>
+  								<th>No</th>
+  								<th>ID User</th>
+  								<th>Nama</th>
+  								<th>Username</th>
+  								<th>Level</th>
+  								<th>Status</th>
+  								<th>Blok User</th>
+  								<th>Opsi</th>
+  							</tr>
+  						</thead>
 
-	  					<tr>
-	  						<td><?= $nomor++?></td>
-	  						<td><?= $row->id_user ?></td>
-	  						<td><?= $row->nama ?></td>
-	  						<td><?= $row->username ?> </td>
-	  						<td>
-	  							<?php if($row->level == 'administrator') : ?>
+  						<tbody>
+  							<?php $nomor = 1; ?>
+  							<?php foreach ($akun as $row) : ?>
 
-	  							<p class="text-danger"><?= $row->level ?></p>
+  								<tr>
+  									<td><?= $nomor++ ?></td>
+  									<td><?= $row->id_user ?></td>
+  									<td><?= $row->nama ?></td>
+  									<td><?= $row->username ?> </td>
+  									<td>
+  										<?php if ($row->level == 'administrator') : ?>
 
-	  							<?php endif; ?>
+  											<span class="badge badge-info px-2"><?= $row->level ?></span>
 
-	  							<?php if($row->level == 'manajemen') : ?>
+  										<?php endif; ?>
 
-	  							<p class="text-warning"><?= $row->level ?></p>
+  										<?php if ($row->level == 'manajemen') : ?>
 
-	  							<?php endif; ?>
+  											<span class="badge badge-warning px-2"><?= $row->level ?></span>
 
-	  							<?php if($row->level == 'peminjam') : ?>
+  										<?php endif; ?>
 
-	  							<p class="text-success"><?= $row->level ?></p>
+  										<?php if ($row->level == 'peminjam') : ?>
 
-	  							<?php endif; ?>
-	  						</td>
-	  						<td>
-	  							<?php if($row->status == 'aktif') : ?>
+  											<span class="badge badge-success px-2"><?= $row->level ?></span>
 
-	  							<small class="badge badge-success"><i class="fa fa-check-circle"></i> <?= $row->status ?></small>
+  										<?php endif; ?>
+  									</td>
+  									<td>
+  										<?php if ($row->status == 'aktif') : ?>
 
-	  							<?php endif; ?>
+  											<small class="badge badge-success"><i class="fa fa-check-circle"></i> <?= $row->status ?></small>
 
-	  							<?php if($row->status == 'blokir') : ?>
+  										<?php endif; ?>
 
-	  							<small class="badge badge-danger"><i class="fa fa-times-circle"></i> <?= $row->status ?></small>
+  										<?php if ($row->status == 'blokir') : ?>
 
-	  							<?php endif; ?>
-	  						</td>
+  											<small class="badge badge-danger"><i class="fa fa-times-circle"></i> <?= $row->status ?></small>
 
-	  						<td>
-	  							<?php if($row->level == 'administrator') : ?>
+  										<?php endif; ?>
+  									</td>
 
-	  							<button type='button' class="btn btn-sm btn-block btn-secondary"><i class="fa fa-user-lock"></i> Terkunci</button>
+  									<td>
+  										<?php if ($row->level == 'administrator') : ?>
 
-	  							<?php endif; ?>
+  											<button type='button' class="btn btn-sm btn-block btn-default"><i class="fa fa-lock"></i> Terkunci</button>
 
-	  							<?php if($row->level != 'administrator' && $row->status == 'aktif') : ?>
+  										<?php endif; ?>
 
-	  							<a href="<?= base_url("update-status/{$row->id_user}/blokir") ?>" class="btn btn-sm btn-block btn-danger">
-	  								<i class="fa fa-user-times"></i> Blokir User
-	  							</a>
+  										<?php if ($row->level != 'administrator' && $row->status == 'aktif') : ?>
 
-	  							<?php endif; ?>
+  											<a href="<?= base_url("update-status/{$row->id_user}/blokir") ?>" class="btn btn-sm btn-block btn-danger">
+  												<i class="fa fa-user-times"></i> Blokir User
+  											</a>
 
-	  							<?php if($row->level != 'administrator' && $row->status == 'blokir') : ?>
+  										<?php endif; ?>
 
-	  							<a href="<?= base_url("update-status/{$row->id_user}/aktif") ?>" class="btn btn-sm btn-block btn-success">
-	  								<i class="fa fa-user-times"></i> Aktifkan User
-	  							</a>
+  										<?php if ($row->level != 'administrator' && $row->status == 'blokir') : ?>
 
-	  							<?php endif; ?>
-	  						</td>
+  											<a href="<?= base_url("update-status/{$row->id_user}/aktif") ?>" class="btn btn-sm btn-block btn-success">
+  												<i class="fa fa-user-times"></i> Aktifkan User
+  											</a>
 
-	  						<td>
+  										<?php endif; ?>
+  									</td>
 
-	  							<?php if($row->level == 'administrator') : ?>
-	  								<button type='button' class="btn btn-secondary"><i class="fa fa-times"></i></button>
-	  							<?php endif; ?>
+  									<td>
 
-	  							<?php if($row->level != 'administrator') : ?>
-		  							<a href="<?= base_url("edit-user/{$row->id_user}") ?>" class="btn btn-sm mr-1 btn-outline-warning">
-		  								<i class="fa fa-edit"></i>
-		  							</a>
+  										<?php if ($row->level == 'administrator') : ?>
+  											<button type='button' class="btn btn-default"><i class="fa fa-times"></i></button>
+  										<?php endif; ?>
 
-		  							<a href="<?= base_url('hapus-user/'.$row->id_user) ?>" class="btn btn-sm btn-outline-danger">
-		  								<i class="fa fa-trash-alt"></i>
-		  							</a>
-	  							<?php endif; ?>
+  										<?php if ($row->level != 'administrator') : ?>
+  											<a href="<?= base_url("edit-user/{$row->id_user}") ?>" data-toggle="tooltip" data-placement="top" title="Edit"><i class="ti-pencil-alt color-muted m-r-5"></i>
+  											</a>
 
-	  						</td>
-	  					</tr>
+  											<a href="<?= base_url('hapus-user/' . $row->id_user) ?>" class="text-danger" data-toggle="tooltip" data-placement="top" title="Hapus"><i class="ti-trash color-muted m-r-5"></i>
+  											</a>
+  										<?php endif; ?>
 
-	  					<?php endforeach; ?>
-	  				</tbody>
-	  			</table>
+  									</td>
+  								</tr>
+
+  							<?php endforeach; ?>
+  						</tbody>
+  					</table>
+  				</div>
   			</div>
   		</div>
-  	</div>
 
+  	</div>
   </div>
-</div>

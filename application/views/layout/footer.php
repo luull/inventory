@@ -1,7 +1,15 @@
-	</section>
-</div>	
-</body>
+</div>
+<!-- #/ container -->
+</div>
 
-<script type="text/javascript" src="<?= base_url('assets/bootstrap/js/bootstrap.js')?>"></script>
-<script type="text/javascript" src="<?= base_url('assets/fontawesome/js/all.js')?>"></script>
+
+</div>
+</body>
+<script src="<?= base_url('assets/quixlab/plugins/common/common.min.js') ?>"></script>
+<script src="<?= base_url('assets/quixlab/js/custom.min.js') ?>"></script>
+<script src="<?= base_url('assets/quixlab/js/settings.js') ?>"></script>
+<script src="<?= base_url('assets/quixlab/js/gleek.js') ?>"></script>
+<script src="<?= base_url('assets/quixlab/js/styleSwitcher.js') ?>"></script>
+
+
 </html>
